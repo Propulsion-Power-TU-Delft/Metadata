@@ -1,2 +1,2 @@
 # Metadata
-Metadata associated to scientific articles or contributions by the Propulsion & Power group
+Metadata associated to articles or other scientific contributions by the Propulsion & Power group
