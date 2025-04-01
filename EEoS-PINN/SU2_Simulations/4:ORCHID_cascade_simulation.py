@@ -37,7 +37,7 @@ p_s_outlet = 2e5        # Outlet static pressure.
 T_t_inlet = 523.0       # Inlet stagnation temperature.
 
 n_iter_firstorder=1e3   # Number of iterations for first-order ROE calculation.
-n_iter_secondorder=1e4  # Number of iterations for second-order JST calculation.
+n_iter_secondorder=2e4  # Number of iterations for second-order JST calculation.
 
 # MLP file names.
 PINN_filename="MLP_PINN"
@@ -240,11 +240,11 @@ def RunSU2(options_firstorder:dict, options_secondorder:dict):
     """
     driver = CSinglezoneDriver(options_firstorder["config_name"], 1, comm)
     driver.StartSolver()
-    driver.Postprocess()
+    driver.Finalize()
 
     driver = CSinglezoneDriver(options_secondorder["config_name"], 1, comm)
     driver.StartSolver()
-    driver.Postprocess()
+    driver.Finalize()
     return 
 
 # Default solver options
@@ -327,6 +327,7 @@ options_HEoS_secondorder["config_name"] = "config_HEoS_secondorder.cfg"
 options_HEoS_secondorder["__N_ITER__"] ="%i" %  n_iter_secondorder
 options_HEoS_secondorder["__CONV_METHOD__"] = "JST"
 options_HEoS_secondorder["__ENABLE_RAMP__"] = "NO"
+options_HEoS_secondorder["__RESTART_SOL__"] = "YES"
 options_HEoS_secondorder["__CONV_FILENAME__"] = "history_JST_HEoS"
 options_HEoS_secondorder["__RESTART_FILENAME__"] = "restart_JST_HEoS"
 options_HEoS_secondorder["__SOLUTION_FILENAME__"] = "restart_ROE_HEoS"
@@ -347,6 +348,7 @@ options_CEoS_secondorder = options_CEoS_firstorder.copy()
 options_CEoS_secondorder["config_name"] = "config_CEoS_secondorder.cfg"
 options_CEoS_secondorder["__N_ITER__"] ="%i" %  n_iter_secondorder
 options_CEoS_secondorder["__CONV_METHOD__"] = "JST"
+options_CEoS_secondorder["__RESTART_SOL__"] = "YES"
 options_CEoS_secondorder["__ENABLE_RAMP__"] = "NO"
 options_CEoS_secondorder["__CONV_FILENAME__"] = "history_JST_CEoS"
 options_CEoS_secondorder["__RESTART_FILENAME__"] = "restart_JST_CEoS"
@@ -385,9 +387,6 @@ RunSU2(options_PINN_firstorder, options_PINN_secondorder)
 
 # Run EEoS-MTNN simulations
 RunSU2(options_MTNN_firstorder, options_MTNN_secondorder)
-
-# Run HEoS simulations
-RunSU2(options_HEoS_firstorder, options_HEoS_secondorder)
 
 # Run CEoS simulations
 RunSU2(options_CEoS_firstorder, options_CEoS_secondorder)

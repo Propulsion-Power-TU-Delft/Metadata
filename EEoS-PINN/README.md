@@ -64,11 +64,14 @@ Progress of the training process is displayed in the terminal and is logged in t
 
 The calculations of the flow through the ORCHID linear cascade are performed using the python wrapper of SU2. 
 
-The flow calculations for the EEoS-PINN, EEoS-MTNN, CEoS, and HEoS are run sequentially with
+The flow calculations for the EEoS-PINN, EEoS-MTNN, and CEoS are run sequentially with
 ```
 cd SU2_Simulations
 mpirun -n <NP> python3 4\:ORCHID_stator_simulation.py
 ```
-where ```<NP>``` is the number of cores to use for running SU2. 
+where ```<NP>``` is the number of cores to use for running SU2. The HEoS fluid model is currently not supported by the python wrapper of SU2, so in order to run the flow calculation using the HEoS fluid model, SU2 should be run directly using
+```
+mpirun -n <NP> SU2_CFD config_HEoS_firstorder.cfg && mpirun -n <NP> SU2_CFD config_HEoS_secondorder.cfg
+```
 
-For each thermodynamic model, a flow calculation is run for 1000 iterations using the first-order accurate ROE convective numerical method. The calculation is then re-started and run for 10000 iterations using the second-order accurate JST convective scheme. The solution of each calculation is updated every 20 iterations and is stored in ```.vtm``` format which can be loaded in [ParaView](https://www.paraview.org/) for post-processing.
+For each thermodynamic model, a flow calculation is run for 1000 iterations using the first-order accurate ROE convective numerical method. The calculation is then re-started and run for 20000 iterations using the second-order accurate JST convective scheme. The solution of each calculation is updated every 20 iterations and is stored in ```.vtm``` format which can be loaded in [ParaView](https://www.paraview.org/) for post-processing.
