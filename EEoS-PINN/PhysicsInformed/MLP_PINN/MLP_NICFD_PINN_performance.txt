@@ -1,0 +1,15 @@
+Training time[minutes]: +1.274e+02
+s test loss: +4.1392650446903024e-06
+T test loss: +4.3551027278286596e-07
+p test loss: +2.3503471698219277e-08
+c2 test loss: +3.8632446097316358e-06
+Total neuron count:  24
+Evaluation time[seconds]: +0.000e+00
+Evaluation cost parameter: +1.800e+02
+Alpha exponent: -3.0000000000000000e+00
+Learning rate decay: +9.8787000000000003e-01
+Batch size exponent: 6
+Decay steps: 8996
+Activation function index: 4
+Number of hidden layers: 2
+Architecture: 12 12
