@@ -37,7 +37,7 @@ The configurations generated in step 1 are used to generate the fluid data that 
 ```
 python3 1\:generate_fluid_data.py 
 ```
-The fluid data are stored under the folders ```Direct``` and ```PhysicsInformed``` as ```.csv``` files. The storage size of the complete data set is approximately 450 MB.
+The fluid data are stored under the folders ```Direct``` and ```PhysicsInformed``` as ```.csv``` files. The storage size of the complete data set is approximately 450 MB. Compressed copies of the fluid data sets that were used to train the neural networks reported in the manuscript can be found in the ```train_data.zip``` files in the ```Direct``` and ```PhysicsInformed``` folders.
 
 ## Step 3: Train MT-NNs
 
@@ -47,7 +47,7 @@ python3 2\:train_MLP_segregated.py
 ```
 Each network is trained for 1000 epochs using data-fitting for the fluid entropy and the first- and second-order derivatives of the fluid entropy with respect to density and internal energy.
 
-Progress of the training process is displayed in the terminal and are logged in the folders ```Direct/Worker_0/Model_0``` and ```Direct/Worker_0/Model_1```. Here, plots of the training convergence process are updated every 10 epochs.
+Progress of the training process is displayed in the terminal and are logged in the folders ```Direct/Worker_0/Model_0``` and ```Direct/Worker_0/Model_1```. Here, plots of the training convergence process are updated every 10 epochs. Copies of the training history for both MTNNs can be found in the folders ```Direct/MLP_low``` and ```Direct/MLP_high```.
 
 ## Step 4: Train PINN
 
@@ -57,7 +57,7 @@ python3 3\:train_MLP_PINN.py
 ```
 The network is at first trained for 1000 epochs using data-fitting for the fluid entropy, after which the physics-informed machine learning process is initiated. 
 
-Progress of the training process is displayed in the terminal and is logged in the folder ```PhysicsInformed/Worker_0/Model_0```. Here, plots of the training convergence process are updated every 10 epochs, as well as visualizations of the fluid thermodynamic state according to the EEoS-PINN and reference data. 
+Progress of the training process is displayed in the terminal and is logged in the folder ```PhysicsInformed/Worker_0/Model_0```. Here, plots of the training convergence process are updated every 10 epochs, as well as visualizations of the fluid thermodynamic state according to the EEoS-PINN and reference data. A copy of the training history of the PINN can be found in the folder ```PhysicsInformed/MLP_PINN```.
 
 
 ## Step 5: Run SU2 simulation
@@ -74,4 +74,6 @@ where ```<NP>``` is the number of cores to use for running SU2. The HEoS fluid m
 mpirun -n <NP> SU2_CFD config_HEoS_firstorder.cfg && mpirun -n <NP> SU2_CFD config_HEoS_secondorder.cfg
 ```
 
-For each thermodynamic model, a flow calculation is run for 1000 iterations using the first-order accurate ROE convective numerical method. The calculation is then re-started and run for 20000 iterations using the second-order accurate JST convective scheme. The solution of each calculation is updated every 20 iterations and is stored in ```.vtm``` format which can be loaded in [ParaView](https://www.paraview.org/) for post-processing.
+For each thermodynamic model, a flow calculation is run for 1000 iterations using the first-order accurate ROE convective numerical method. The calculation is then re-started and run for 20000 iterations using the second-order accurate JST convective scheme. The solution of each calculation is updated every 20 iterations and is stored in ```.vtm``` format which can be loaded in [ParaView](https://www.paraview.org/) for post-processing. 
+
+Copies of the SU2 configuration files, convergence history, restart files, and flow solution are also available as compressed ```.zip``` files in the folder ```SU2_Simulations```.
