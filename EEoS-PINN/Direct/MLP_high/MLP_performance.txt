@@ -1,0 +1,12 @@
+Training time[minutes]: +5.241e+01
+Validation score: +2.1920172343925515e-08
+Total neuron count:  40
+Evaluation time[seconds]: +2.927e-01
+Evaluation cost parameter: +4.730000e+02
+Alpha exponent: -3.0720999999999998e+00
+Learning rate decay: +9.9250000000000005e-01
+Batch size exponent: 5
+Decay steps: 4400
+Activation function index: 5
+Number of hidden layers: 3
+Architecture: 13 15 12
