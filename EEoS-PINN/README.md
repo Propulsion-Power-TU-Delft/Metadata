@@ -1,8 +1,8 @@
 # Consistent, data-driven fluid model for NICFD using physics-informed machine learning
 
-This folder contains the scripts and configurations used for the study of "Consistent, data-driven fluid model for NICFD using physics-informed machine learning". The scripts used to generate the fluid data and define the data-driven fluid models are in the current folder, while the scripts used for post-processing of the data and the generation of images are in the folder [PostProcessing](./PostProcessing/). 
+This folder contains the scripts and configurations used for the study of "Consistent, data-driven fluid model for NICFD using physics-informed machine learning". The scripts used to generate the fluid data and define the data-driven fluid models are in the current folder.
 
-The fluid data and neural networks in this study were generated using [SU2 DataMiner](https://github.com/EvertBunschoten/SU2_DataMiner). This file explains the process used to re-produce the results of the study.
+The fluid data and neural networks in this study were generated using [SU2 DataMiner](https://github.com/Propulsion-Power-TU-Delft/SU2_DataMiner). This file explains the process used to re-produce the results of the study.
 
 ## Step 0: Requirements and set-up 
 
