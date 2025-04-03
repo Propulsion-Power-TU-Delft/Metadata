@@ -8,7 +8,7 @@ The fluid data and neural networks in this study were generated using [SU2 DataM
 
 All steps for generating the fluid data, training the neural networks, and running the CFD calculations are presented as python scripts. 
 
-SU2 DataMiner can be used by downloading the [source code](https://github.com/EvertBunschoten/SU2_DataMiner) and exporting the environment variables listed in the documentation. 
+SU2 DataMiner can be used by downloading the [source code](https://github.com/Propulsion-Power-TU-Delft/SU2_DataMiner) and exporting the environment variables listed in the documentation. 
 
 In order to reproduce the simulation results in this study, an installation of [SU2](https://github.com/su2code/SU2.git) version 8.1.0 "Harrier" or newer is required. 
 
@@ -37,7 +37,7 @@ The configurations generated in step 1 are used to generate the fluid data that 
 ```
 python3 1\:generate_fluid_data.py 
 ```
-The fluid data are stored under the folders ```Direct``` and ```PhysicsInformed``` as ```.csv``` files. The storage size of the complete data set is approximately 450 MB. Compressed copies of the fluid data sets that were used to train the neural networks reported in the manuscript can be found in the ```train_data.zip``` files in the ```Direct``` and ```PhysicsInformed``` folders.
+The fluid data are stored under the folders ```Direct``` and ```PhysicsInformed``` as ```.csv``` files. The storage size of the complete data set is approximately 450 MB.
 
 ## Step 3: Train MT-NNs
 
@@ -75,5 +75,3 @@ mpirun -n <NP> SU2_CFD config_HEoS_firstorder.cfg && mpirun -n <NP> SU2_CFD conf
 ```
 
 For each thermodynamic model, a flow calculation is run for 1000 iterations using the first-order accurate ROE convective numerical method. The calculation is then re-started and run for 20000 iterations using the second-order accurate JST convective scheme. The solution of each calculation is updated every 20 iterations and is stored in ```.vtm``` format which can be loaded in [ParaView](https://www.paraview.org/) for post-processing. 
-
-Copies of the SU2 configuration files, convergence history, restart files, and flow solution are also available as compressed ```.zip``` files in the folder ```SU2_Simulations```.
